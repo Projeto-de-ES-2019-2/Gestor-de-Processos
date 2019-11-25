@@ -2,4 +2,4 @@
 
 <%= render 'form', advogado: @advogado %>
 
-<%= link_to 'Back', advogados_path %>
+<p><%= button_to "Cancel my account", registration_path(current_user), data: { confirm: "Are you sure?" }, method: :delete %></p>

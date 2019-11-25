@@ -10,8 +10,7 @@ class CreateProcessos < ActiveRecord::Migration[5.1]
       t.string :num_processo
       t.date :ultimo_contato_cliente
       t.date :contato_agendado
-      t.string :adv_principal
-      t.string :adv_assistente
+      t.references :advogado, foreign_key: true
 
       t.timestamps
     end

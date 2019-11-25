@@ -10,8 +10,7 @@ one:
   num_processo: MyString
   ultimo_contato_cliente: 2019-10-20
   contato_agendado: 2019-10-20
-  adv_principal: MyString
-  adv_assistente: MyString
+  advogado: one
 
 two:
   cliente: MyString
@@ -23,5 +22,4 @@ two:
   num_processo: MyString
   ultimo_contato_cliente: 2019-10-20
   contato_agendado: 2019-10-20
-  adv_principal: MyString
-  adv_assistente: MyString
+  advogado: two

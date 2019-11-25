@@ -14,10 +14,11 @@ ActiveRecord::Schema.define(version: 20191111174622) do
 
   create_table "advogados", force: :cascade do |t|
     t.string "nome"
-    t.string "email"
     t.string "n_OAB"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_advogados_on_user_id"
   end
 
   create_table "historicos", force: :cascade do |t|
@@ -38,10 +39,10 @@ ActiveRecord::Schema.define(version: 20191111174622) do
     t.string "num_processo"
     t.date "ultimo_contato_cliente"
     t.date "contato_agendado"
-    t.string "adv_principal"
-    t.string "adv_assistente"
+    t.integer "advogado_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["advogado_id"], name: "index_processos_on_advogado_id"
   end
 
   create_table "users", force: :cascade do |t|

@@ -4,13 +4,21 @@ class AdvogadosController < ApplicationController
   # GET /advogados
   # GET /advogados.json
   def index
+    if current_user.advogado.nil?
+      redirect_to(:action => 'new')
+    else
+      @advogado = current_user.advogado
+    end
+  end
+
+  def list
     @advogados = Advogado.all
   end
 
   # GET /advogados/1
   # GET /advogados/1.json
-  def show
-  end
+  # def show
+  # end
 
   # GET /advogados/new
   def new
@@ -25,11 +33,11 @@ class AdvogadosController < ApplicationController
   # POST /advogados.json
   def create
     @advogado = Advogado.new(advogado_params)
-
+    @advogado.user = current_user
     respond_to do |format|
       if @advogado.save
         format.html { redirect_to @advogado, notice: 'Advogado was successfully created.' }
-        format.json { render :show, status: :created, location: @advogado }
+        format.json { render :index, status: :created, location: @advogado }
       else
         format.html { render :new }
         format.json { render json: @advogado.errors, status: :unprocessable_entity }
@@ -69,6 +77,6 @@ class AdvogadosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def advogado_params
-      params.require(:advogado).permit(:nome, :email, :n_OAB)
+      params.require(:advogado).permit(:nome, :n_OAB)
     end
 end

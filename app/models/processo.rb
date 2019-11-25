@@ -1,5 +1,7 @@
 class Processo < ApplicationRecord
   has_many :historicos
+  belongs_to :advogado
+
   validates :num_processo, presence: true
   validates :cliente, presence: true
 

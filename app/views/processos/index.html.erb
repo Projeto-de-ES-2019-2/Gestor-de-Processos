@@ -2,12 +2,15 @@
 
 <h1>Processos</h1>
 <hr>
+<%= link_to "Voltar", advogados_path %>
+<br>
+<br>
 <%= form_tag(processos_path, :method => :get) do %>
   <%=text_field_tag 'search', nil, placeholder: 'Nº do processo' %>
   <%=submit_tag "Buscar" %>
 <%end %>
+<br>
 
-<%= link_to "Voltar", advogados_path %>
 <table>
   <thead>
     <tr>

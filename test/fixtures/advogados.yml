@@ -3,7 +3,9 @@
 one:
   nome: MyString
   n_OAB: MyString
+  user: one
 
 two:
   nome: MyString
   n_OAB: MyString
+  user: two

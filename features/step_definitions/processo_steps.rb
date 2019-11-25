@@ -48,14 +48,6 @@ And ('eu preencho o campo de Contato agendado com o dia {string}, o mes {string}
   select dia, :from => 'processo_contato_agendado_3i'
 end
 
-And ('eu preencho o campo de Adv principal com {string}') do |nome|
-  fill_in 'Adv principal', :with => nome
-end
-
-And ('eu preencho o campo de Adv assistente com {string}') do |nome|
-  fill_in 'Adv assistente', :with => nome
-end
-
 And ('eu clico em confirmar') do
   click_button 'submit'
 end
@@ -64,11 +56,16 @@ Then ('eu vejo que o processo com o numero {string} foi criado corretamente') do
   expect(page).to have_content(num)
 end
 
-And ('existe um processo com o numero {string}') do |num|
+And ('existe um processo com o numero {string} que tem {string} como advogado') do |num, nome|
   p = Processo.new(:cliente => 'cliente', :ex_adversa =>'opositor', :tipo_acao => 'tipo de ação',
                    :juizo => 'juizo', :num_processo => num, :ultimo_contato_cliente => Date.current,
-                   :contato_agendado => Date.current.tomorrow, :adv_principal => 'principal',
-                   :adv_assistente => 'assistente')
+                   :contato_agendado => Date.current.tomorrow)
+  p.advogado = Advogado.find_by nome: nome
+
+  if p.advogado.nil?
+    p.advogado = Advogado.new(nome: nome, n_OAB: "123123")
+  end
+
   p.save!
 end
 
@@ -89,7 +86,6 @@ When ('eu clico em editar o processo com o numero {string}') do |num|
   click_link "e-#{num}"
 end
 
-
 Then ('eu vejo que o campo Contato agendado do processo tem a data {string}') do |data|
   expect(page).to have_content(data)
 end
@@ -102,10 +98,6 @@ Then ('eu vejo a pagina do processo que tem o numero {string}') do |num|
   expect(page).to have_content("Processo - #{num}")
 end
 
-When ('eu preencho o campo de pesquisa com o numero {string}') do |num|
-  fill_in 'search', :with => num
-end
-
-And ('eu clico em buscar') do
-  click_button 'Buscar'
+Then ('eu vejo uma mensagem indicandoque o processo nao pode ser editado sem um numero') do
+  assert_selector('div#error_explanation')
 end

@@ -1,6 +1,8 @@
 <h1>Editing Advogado</h1>
+<hr>
+<%= link_to 'Back', advogado_path(@advogado) %> |
+<%= link_to 'Edit account', edit_user_registration_path %>
 
 <%= render 'form', advogado: @advogado %>
 
-<%= link_to 'Show', @advogado %> |
-<%= link_to 'Back', advogados_path %>
+

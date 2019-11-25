@@ -1,18 +1,13 @@
-<h1>Advogado - <%=@advogado.nome %></h1>
 <p id="notice"><%= notice %></p>
 
-<h1>Advogado - <%= @advogado.nome %></h1>
+<h1>Advogado Info - <%=@advogado.nome %> </h1>
 <hr>
+<%= link_to 'Back', advogados_path %> |
+<%= link_to 'Edit', edit_advogado_path(@advogado) %>
+
+<%= render 'show' %>
 
 <p>
-  <strong>Nome:</strong>
-  <%= @advogado.nome %>
+  <strong>Email:</strong>
+  <%= @advogado.user.email %>
 </p>
-
-<p>
-  <strong>N oab:</strong>
-  <%= @advogado.n_OAB %>
-</p>
-
-<%= link_to 'Edit', edit_advogado_path(@advogado) %> |
-<%= link_to 'Back', advogados_path %>
